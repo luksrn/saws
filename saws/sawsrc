@@ -20,3 +20,72 @@ log_file = ~/.saws.log
 # Default log level. Possible values: "CRITICAL", "ERROR", "WARNING", "INFO"
 # and "DEBUG".
 log_level = INFO
+
+
+[localstack]
+
+enabled = True
+region = us-east-1
+
+# API Gateway
+apigateway = http://localhost:4567
+
+# Kinesis
+kinesis = http://localhost:4568
+
+# DynamoDB
+dynamodb = http://localhost:4569
+
+# DynamoDB Streams
+dynamodbstreams = http://localhost:4570
+
+# Elasticsearch
+# es = http://localhost:4571
+
+# S3
+s3 = http://localhost:4572
+
+# Firehose
+firehose = http://localhost:4573
+
+# Lambda
+lambda = http://localhost:4574
+
+# SNS
+sns = http://localhost:4575
+
+# SQS
+sqs = http://localhost:4576
+
+# Redshift
+redshift = http://localhost:4577
+
+# ES (Elasticsearch Service)
+es = http://localhost:4578
+
+# SES
+ses = http://localhost:4579
+
+# Route53
+route53 = http://localhost:4580
+
+# CloudFormation
+cloudformation = http://localhost:4581
+
+# CloudWatch
+cloudwatch = http://localhost:4582
+
+# SSM
+ssm = http://localhost:4583
+
+# SecretsManager
+secretsmanager = http://localhost:4584
+
+# StepFunctions
+stepfunctions = http://localhost:4585
+
+# STS
+sts = http://localhost:4592
+
+# IAM
+iam = http://localhost:4593

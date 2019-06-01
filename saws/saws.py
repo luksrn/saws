@@ -369,6 +369,33 @@ class Saws(object):
             self.aws_cli.input_processor.feed(KeyPress(Keys.ControlM, u''))
             self.aws_cli.input_processor.process_keys()
 
+    def _handle_localstack(self, text):
+
+        enabled = self.config_obj[self.config.LOCALSTACK]['enabled']
+
+        if enabled == 'False':
+            return text
+
+        stripped_text = text.strip()
+        if stripped_text == '':
+            return text
+        command_splited = stripped_text.split()
+        if AwsCommands.AWS_COMMAND not in command_splited[0] or len(command_splited) < 2:
+            return text
+
+        subcommand = command_splited[1]
+        if not self.config_obj[self.config.LOCALSTACK].has_key(subcommand):
+            self.logger.error("Service not found: %s", subcommand)
+            return
+        service_addr = self.config_obj[self.config.LOCALSTACK][subcommand]
+        region = self.config_obj[self.config.LOCALSTACK]['region']
+
+        text = text + " --endpoint-url=" + service_addr + " --region=" + region
+
+        self.logger.info("Command change to be executed in localstack: %s", text)
+
+        return text
+
     def _process_command(self, text):
         """Processes the input command, called by the cli event loop
 
@@ -384,6 +411,7 @@ class Saws(object):
                 return
         try:
             if not self._handle_cd(text):
+                text = self._handle_localstack(text)
                 text = self._colorize_output(text)
                 # Pass the command onto the shell so aws-cli can execute it
                 subprocess.call(text, shell=True)

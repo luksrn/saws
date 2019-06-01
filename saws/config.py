@@ -50,6 +50,7 @@ class Config(object):
     COLOR = 'color_output'
     FUZZY = 'fuzzy_match'
     SHORTCUT = 'shortcut_match'
+    LOCALSTACK = 'localstack'
 
     def get_shortcuts(self, config_obj):
         """Gets the shortcuts from the specified config.
